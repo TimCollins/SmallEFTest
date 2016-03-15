@@ -9,9 +9,17 @@ namespace ConsoleApp
         {
             using (var ctx = new SchoolContext())
             {
+                Standard standard = new Standard
+                {
+                    StandardName = "Top Quality"
+                };
+
+                ctx.Standards.Add(standard);
+
                 Student s = new Student
                 {
-                    StudentName = "Homer Simpson"
+                    StudentName = "Homer Simpson",
+                    StandardId = standard.StandardId
                 };
 
                 ctx.Students.Add(s);

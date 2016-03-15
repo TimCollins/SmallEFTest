@@ -45,3 +45,22 @@ Adding
 Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SchoolContext>());
 
 to OnModelCreating makes the error go away but it would be nice to know why it's needed and why the page doesn't discuss it.
+
+Even without a Teacher entity class the Student table still gets a Teacher_TeacherId column and a Teachers table is created. This is type discover apparently.
+
+The Primary Key convention is to have Id or <table_name>Id. Data Annotations or the Fluent API can be used to work around naming conventions.
+
+The relationship between two entities is inferred through navigation properties. The two properties below will cause EF to create a one to many relationship:
+
+	public Standard Standard { get; set; }
+	...
+	public ICollection<Student> Students { get; set; }
+	
+It is recommended to include foreign key properties. Using the Student and Standards example, one student is associated with one standand.
+
+Of course when I try to run the code, I get an error when a foreign key definition is added because I'm trying to create a student against a non-existent standard.
+
+{"The INSERT statement conflicted with the FOREIGN KEY constraint \"FK_dbo.Students_dbo.Standards_StandardId\". The conflict occurred in database \"ConsoleApp.SchoolContext\", table \"dbo.Standards\", column 'StandardId'.\r\nThe statement has been terminated."}
+
+The fix for this seems to be to create a Standard first, then assign it to the Student entity.
+The key point is that when a foreign key property is defined, the name of the column can be controlled. Instead of Standard_StandardId, the Student table now simply has StandardId.
