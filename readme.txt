@@ -78,3 +78,38 @@ The fix for this seems to be to create a Standard first, then assign it to the S
 The key point is that when a foreign key property is defined, the name of the column can be controlled. Instead of Standard_StandardId, the Student table now simply has StandardId.
 
 Various data annotations can be added to control things like a disconnect between table and entity names, properties that should not be mapped, properties that should be used as Id columns that don't follow the naming convention and properties that should have a specific type or max length associated with them.
+
+The Fluent API can be used by overriding OnModelCreating. This had to be done previously to fix an error.
+
+The general format for a one to one relationship seems to be as follows:
+
+    public class Student {
+        public int StudentID { get; set; }		
+		public int StandardId { get; set; }
+		public string StudentName { get; set; }
+		...
+        public Standard Standard { get; set; }
+        public virtual StudentAddress StudentAddress { get; set; }
+	}
+	
+	public class StudentAddress {
+        [Key, ForeignKey("Student")]
+        public int StudentId { get; set; }
+		...
+        public string City { get; set; }
+        public virtual Student Student { get; set; }
+    }
+	
+	public class Standard {
+        public int StandardId { get; set; }
+        public string StandardName { get; set; }
+
+        public ICollection<Student> Students { get; set; }
+    }
+	
+	context.Students
+		.Include(s => s.Standard)
+		.Include(s => s.StudentAddress)
+		.FirstOrDefault(s => s.StudentID == id);
+	
+The main entity has a primary key. The entity with which it has a one to one relationship has a primary key with the same name and a virtual property of the main entity type.

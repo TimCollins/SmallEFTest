@@ -14,10 +14,10 @@ namespace ConsoleApp
             //    AddEntities(ctx);
             //}
 
-            var student = GetStudent(2);
+            var student = GetStudent(3);
             const string output = "Name: {0}\nAddress: {1}\nStandard: {2}";
-            
             Console.WriteLine(output, student.StudentName, student.StudentAddress.City, student.Standard.StandardName);
+
             Util.WaitForEscape();
         }
 
@@ -43,16 +43,14 @@ namespace ConsoleApp
             };
 
             ctx.Standards.Add(standard);
-            Console.WriteLine("Standard added.");
 
             Student s = new Student
             {
-                StudentName = "Homer Simpson",
+                StudentName = "Marge Simpson",
                 StandardId = standard.StandardId
             };
 
             ctx.Students.Add(s);
-            Console.WriteLine("Student added.");
 
             StudentAddress address = new StudentAddress
             {
