@@ -10,7 +10,7 @@ General steps to set up EF in a project:
 	. Create context class inheriting from DbContext.
 	. Add DbSet properties for each entity to the context class.
 	
-EF will infer properties of each table based on the entity classes. Primary keys will be ints and named either 'Id' or '<table>Id'. Foreign keys will be named '<table>_<column>Id'
+EF uses conventions to infer properties of each table based on the entity classes. Primary keys will be ints and named either 'Id' or '<table>Id'. Foreign keys will be named '<table>_<column>Id'
 
     public class Student {
         public int StudentID { get; set; }
@@ -25,4 +25,23 @@ EF will infer properties of each table based on the entity classes. Primary keys
         public string StandardName { get; set; }
 
         public ICollection<Student> Students { get; set; }
-    }	
+    }
+	
+Many other conventions are available in the System.Data.Entity.ModelConfiguration.Conventions namespace.
+https://msdn.microsoft.com/en-us/library/system.data.entity.modelconfiguration.conventions%28v=vs.103%29.aspx
+
+The page then describes adding a Teacher class without a corresponding DbSet property. When I tried to add this I got this error "The model backing the 'SchoolContext' context has changed since the database was created."
+
+According to http://stackoverflow.com/a/6143116/ the solution is to add something like this to the SchoolContext class:
+	protected override void OnModelCreating(DbModelBuilder modelBuilder)
+	{
+		Database.SetInitializer<SchoolContext>(null);
+		base.OnModelCreating(modelBuilder);
+	}
+	
+When I do that I get this error: "Invalid column name 'Teacher_TeacherId'."
+
+Adding 
+Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SchoolContext>());
+
+to OnModelCreating makes the error go away but it would be nice to know why it's needed and why the page doesn't discuss it.

@@ -12,5 +12,6 @@ namespace ConsoleApp.Models
         public float Weight { get; set; }
 
         public Standard Standard { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }
