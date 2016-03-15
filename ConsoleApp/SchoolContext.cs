@@ -11,6 +11,7 @@ namespace ConsoleApp
 
         public SchoolContext() : base("name=SmallEfTest")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
