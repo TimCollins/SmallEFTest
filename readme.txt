@@ -3,6 +3,18 @@ From http://www.entityframeworktutorial.net/code-first/simple-code-first-example
 The class that inherits from DbContext is the bridge between the database and the entity classes of the project. It is responsible for interacting with data in general terms e.g. defining connection string details or performing certain actions when certain events happen. See http://www.entityframeworktutorial.net/EntityFramework4.3/dbcontext-vs-objectcontext.aspx
 
 If no connection string is supplied to EF Code First then the database will be created in the local SQLEXPRESS instance and named per the project. In this case the database is called ConsoleApp.SchoolContext.
+See this image for the steps that are used to initialise the database:
+http://www.entityframeworktutorial.net/images/codefirst/database-init-fg1.PNG
+
+If a connection string is passed in the context's base constructor
+	If database exists
+		Use existing database
+	Else
+		Create new database
+ElseIf a database name is passed in the context's base constructor
+		Create database in SQLEXPRESS with that database name
+Else
+	Create database in SQLEXPRESS with name derives from namespace and context name.
 
 General steps to set up EF in a project:
 	. Install it via NuGet or Package Manager
