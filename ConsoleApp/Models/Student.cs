@@ -15,5 +15,7 @@ namespace ConsoleApp.Models
 
         public Standard Standard { get; set; }
         public Teacher Teacher { get; set; }
+
+        public virtual StudentAddress StudentAddress { get; set; }
     }
 }
