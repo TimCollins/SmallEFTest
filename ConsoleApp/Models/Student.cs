@@ -1,19 +1,24 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConsoleApp.Models
 {
+    [Table("StudentInfo")]
     public class Student
     {
-        public int StudentID { get; set; }
+        [Key]
+        public int SID{ get; set; }
+
+        [Column("Name", TypeName = "ntext")]
+        [MaxLength(20)]
         public string StudentName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public byte[] Photo { get; set; }
-        public decimal Height { get; set; }
-        public float Weight { get; set; }
 
-        public int StandardId { get; set; }
+        [NotMapped]
+        public int? Age { get; set; }
+        
+        public int StdId { get; set; }
 
+        [ForeignKey("StdId")]
         public Standard Standard { get; set; }
-        public Teacher Teacher { get; set; }
     }
 }

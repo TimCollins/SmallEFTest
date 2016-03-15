@@ -76,3 +76,5 @@ Of course when I try to run the code, I get an error when a foreign key definiti
 
 The fix for this seems to be to create a Standard first, then assign it to the Student entity.
 The key point is that when a foreign key property is defined, the name of the column can be controlled. Instead of Standard_StandardId, the Student table now simply has StandardId.
+
+Various data annotations can be added to control things like a disconnect between table and entity names, properties that should not be mapped, properties that should be used as Id columns that don't follow the naming convention and properties that should have a specific type or max length associated with them.

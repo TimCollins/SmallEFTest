@@ -19,7 +19,7 @@ namespace ConsoleApp
                 Student s = new Student
                 {
                     StudentName = "Bart Simpson",
-                    StandardId = standard.StandardId
+                    StdId = standard.StandardId
                 };
 
                 ctx.Students.Add(s);
