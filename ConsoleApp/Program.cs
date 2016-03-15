@@ -18,14 +18,13 @@ namespace ConsoleApp
 
                 Student s = new Student
                 {
-                    StudentName = "Bart Simpson",
-                    StdId = standard.StandardId
+                    StudentName = "Homer Simpson",
+                    StandardId = standard.StandardId
                 };
 
                 ctx.Students.Add(s);
                 ctx.SaveChanges();
             }
-
             Console.WriteLine("Student added.");
             Util.WaitForEscape();
         }
