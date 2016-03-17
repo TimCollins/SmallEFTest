@@ -27,6 +27,13 @@ namespace ConsoleApp
             modelBuilder.Entity<Student>()
                 .HasOptional(s => s.StudentAddress)
                 .WithRequired(ad => ad.Student);
+
+            // Define the StdId property of Student as being a foreign key
+            // to Standard and that there is a 1-M relationship between the tables
+            modelBuilder.Entity<Student>()
+                .HasRequired<Standard>(s => s.Standard)
+                .WithMany(s => s.Students)
+                .HasForeignKey(s => s.StdId);
         }
     }
 }

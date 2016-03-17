@@ -9,14 +9,14 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            using (var ctx = new SchoolContext())
-            {
-                AddEntities(ctx);
-            }
+            //using (var ctx = new SchoolContext())
+            //{
+            //    AddEntities(ctx);
+            //}
 
-            //var student = GetStudent(2);
-            //const string output = "Name: {0}\nAddress: {1}\nStandard: {2}";
-            //Console.WriteLine(output, student.StudentName, student.StudentAddress.City, student.Standard.StandardName);
+            var student = GetStudent(1);
+            const string output = "Name: {0}\nAddress: {1}\nStandard: {2}";
+            Console.WriteLine(output, student.StudentName, student.StudentAddress.City, student.Standard.StandardName);
 
             Util.WaitForEscape();
         }
@@ -47,7 +47,8 @@ namespace ConsoleApp
             Student s = new Student
             {
                 StudentName = "Marge Simpson",
-                StandardId = standard.StandardId
+                StdId = standard.StandardId
+                //StandardId = standard.StandardId
             };
 
             ctx.Students.Add(s);
