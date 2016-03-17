@@ -17,4 +17,5 @@ N/A
 
 Useful Links
 --
+- [EF Code First Tutorial] (http://www.entityframeworktutorial.net/code-first/entity-framework-code-first.aspx)
 - [Online Markdown Editor](http://dillinger.io/)
