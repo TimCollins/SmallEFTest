@@ -1,29 +1,97 @@
+using System.Collections.Generic;
+using System.Linq;
+using ConsoleApp.Models;
+
 namespace ConsoleApp.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ConsoleApp.SchoolContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SchoolContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "ConsoleApp.SchoolContext";
         }
 
-        protected override void Seed(ConsoleApp.SchoolContext context)
+        protected override void Seed(SchoolContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            AddStandards(context);
+            AddCourses(context);
+            AddStudents(context);
+            //AddAddresses(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private void AddAddresses(SchoolContext context)
+        {
+            var student = context.Students.FirstOrDefault(s => s.StudentName == "Marge Simpson");
+            StudentAddress address = new StudentAddress
+            {
+                Address1 = "Apt 4A",
+                Address2 = "123, Fake Street",
+                City = "Springfield",
+                Country = "USA",
+                State = "NY",
+                Student = student
+            };
+
+            context.StudentAddresses.Add(address);
+            context.SaveChanges();
+        }
+
+        private void AddStudents(SchoolContext context)
+        {
+            var standard = context.Standards.FirstOrDefault(s => s.StandardName == "Gold Standard");
+
+            Student student = new Student
+            {
+                StudentName = "Marge Simpson",
+                StandardId = standard.StandardId
+            };
+
+            context.Students.Add(student);
+            context.SaveChanges();
+        }
+
+        private void AddCourses(SchoolContext context)
+        {
+            var defaultCourses = new List<Course>
+            {
+                new Course
+                {
+                    Name = "Underwater Basket Weaving"
+                },
+                new Course
+                {
+                    Name = "Photography"
+                }
+            };
+
+            context.Courses.AddRange(defaultCourses.ToArray());
+            context.SaveChanges();
+        }
+
+        private void AddStandards(SchoolContext context)
+        {
+            var defaultStandards = new List<Standard>
+            {
+                new Standard
+                {
+                    StandardName = "Bronze Standard"
+                },
+                new Standard
+                {
+                    StandardName = "Silver Standard"
+                },
+                new Standard
+                {
+                    StandardName = "Gold Standard"
+                }
+            };
+
+            context.Standards.AddRange(defaultStandards.ToArray());
+            context.SaveChanges();
         }
     }
 }

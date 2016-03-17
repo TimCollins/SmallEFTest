@@ -55,7 +55,6 @@
     <Compile Include="Models\Standard.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentAddress.cs" />
-    <Compile Include="SchoolDbInitialiser.cs" />
     <Compile Include="StudentEntityConfiguration.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Program.cs" />

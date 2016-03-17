@@ -12,7 +12,6 @@ namespace ConsoleApp.Models
         public decimal Height { get; set; }
         public float Weight { get; set; }
         public int StandardId { get; set; }
-        public string Notes { get; set; }
         public virtual Standard Standard { get; set; }
         public Teacher Teacher { get; set; }
 

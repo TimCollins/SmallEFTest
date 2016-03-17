@@ -12,13 +12,14 @@ namespace ConsoleApp
 
         public SchoolContext() : base("name=SmallEfTest")
         {
+            //Database.SetInitializer(new SchoolDbInitialiser());
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<SchoolContext, Migrations.Configuration>("SmallEfTest"));
             Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new SchoolDbInitialiser());
-
             modelBuilder.Configurations.Add(new StudentEntityConfiguration());
 
             // Define StudentId as the primary key of StudentAddress
