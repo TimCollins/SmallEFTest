@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp.Models
 {
@@ -11,13 +12,12 @@ namespace ConsoleApp.Models
         public decimal Height { get; set; }
         public float Weight { get; set; }
 
-        // This isn't following the naming convention.
-        // It should be StandardId.
-        public int StdId { get; set; }
+        public int StandardId { get; set; }
 
         public virtual Standard Standard { get; set; }
         public Teacher Teacher { get; set; }
 
         public virtual StudentAddress StudentAddress { get; set; }
+        public virtual ICollection<Course> Courses { get; set; } 
     }
 }

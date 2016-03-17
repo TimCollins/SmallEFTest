@@ -113,3 +113,18 @@ The general format for a one to one relationship seems to be as follows:
 		.FirstOrDefault(s => s.StudentID == id);
 	
 The main entity has a primary key. The entity with which it has a one to one relationship has a primary key with the same name and a virtual property of the main entity type.
+
+For a many-to-many relationship the general format seems to be to have a collection of each entity:
+    public class Course {
+	public int Id { get; set; }
+		...
+        public virtual ICollection<Student> Students { get; set; }
+    }
+	
+	public class Student {
+		public int StudentID { get; set; }
+		...
+        public virtual ICollection<Course> Courses { get; set; } 
+    }
+	
+The above entity definitions will result in a new table being created in the database called StudentCourses. It will have Student_StudentID and Course_Id defined as primary and foreign keys.
