@@ -136,3 +136,5 @@ There are a few different initialisation strategies:
 	4. Custom
 	
 A custom initialisation strategy is defined by creating a class that inherits from one of the initialisers.
+
+There are two types of migration available - Automated Migration and Code based Migration.
