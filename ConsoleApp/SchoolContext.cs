@@ -17,7 +17,7 @@ namespace ConsoleApp
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SchoolContext>());
+            Database.SetInitializer(new SchoolDbInitialiser());
 
             modelBuilder.Configurations.Add(new StudentEntityConfiguration());
 

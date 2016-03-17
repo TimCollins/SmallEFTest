@@ -10,7 +10,7 @@ namespace ConsoleApp
             ToTable("Student");
 
             Property(p => p.DateOfBirth)
-                .HasColumnName("DoB")
+                .HasColumnName("DateOfBirth")
                 .HasColumnOrder(3)
                 .HasColumnType("datetime2");
 
