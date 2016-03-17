@@ -128,3 +128,11 @@ For a many-to-many relationship the general format seems to be to have a collect
     }
 	
 The above entity definitions will result in a new table being created in the database called StudentCourses. It will have Student_StudentID and Course_Id defined as primary and foreign keys.
+
+There are a few different initialisation strategies:
+	1. CreateDatabaseIfNotExists - This is the default.
+	2. DropCreateDatabaseIfModelChanges - Drop an existing database and create a new one if the model classes change.
+	3. DropCreateDatabaseAlways - Always drop an existing database and create a new one.
+	4. Custom
+	
+A custom initialisation strategy is defined by creating a class that inherits from one of the initialisers.
