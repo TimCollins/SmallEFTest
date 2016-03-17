@@ -19,6 +19,8 @@ namespace ConsoleApp
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SchoolContext>());
 
+            modelBuilder.Configurations.Add(new StudentEntityConfiguration());
+
             // Define StudentId as the primary key of StudentAddress
             modelBuilder.Entity<StudentAddress>()
                 .HasKey(e => e.StudentId);
